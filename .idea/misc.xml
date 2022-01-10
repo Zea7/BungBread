@@ -25,13 +25,13 @@
         <entry key="..\:/VSCode/BungBread/app/src/main/res/menu/save.xml" value="0.12927631578947368" />
         <entry key="..\:/VSCode/BungBread/community/src/main/res/layout/activity_community.xml" value="0.12927631578947368" />
         <entry key="..\:/VSCode/BungBread/profile/src/main/res/layout/activity_info.xml" value="0.12006578947368421" />
+        <entry key="app/src/main/res/layout/fragment_info.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/rv_item_store.xml" value="0.4036458333333333" />
       </map>
     </option>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
+    <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

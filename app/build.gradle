@@ -40,13 +40,13 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.kakao.sdk:v2-user:2.8.4'
     implementation "com.github.bumptech.glide:glide:4.11.0"
-    implementation files('D:\\VSCode\\BungBread\\app\\libs\\libDaumMapAndroid.jar')
     implementation 'gun0912.ted:tedpermission:2.0.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.squareup.retrofit2:retrofit:2.7.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
     implementation 'io.github.ibrahimyilmaz:kiel:1.2.1'
+    implementation files('/Users/park/AndroidStudioProjects/BungBread/app/libs/libDaumMapAndroid.jar')
     annotationProcessor "com.github.bumptech.glide:compiler:4.11.0"
     //noinspection GradleCompatible
     implementation 'com.android.support:design:28.0.0'
@@ -56,4 +56,10 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation 'io.github.ibrahimyilmaz:kiel:1.2.1'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.6.4'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.4'
+    implementation 'com.google.code.gson:gson:2.8.9'
+
 }
