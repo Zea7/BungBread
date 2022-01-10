@@ -1,4 +1,4 @@
-package com.example.bungeoppang
+package com.example.bungeoppang.AddStore
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,14 +6,15 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import org.json.JSONObject
+import com.example.bungeoppang.R
+import com.example.bungeoppang.ServerConnect
+import com.example.bungeoppang.Variables
 
 
 class AdditionalInfo : AppCompatActivity(), ChangeMenu {
@@ -63,7 +64,7 @@ class AdditionalInfo : AppCompatActivity(), ChangeMenu {
             getInfoFromEdit()
             val jsons = menuAdapter?.getAllJsons()
             // Variable로 변경 필요
-            //ServerConnect.sendStoreInfo(address!!, name!!, 12345678, "박현준", latitude, longitude, jsons, comment!!, this)
+            ServerConnect.sendStoreInfo(address!!, name!!, Variables.USER_ID, Variables.USER_NAME, latitude, longitude, jsons, comment!!, this)
         }
         return super.onOptionsItemSelected(item)
     }
