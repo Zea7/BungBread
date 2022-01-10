@@ -1,14 +1,20 @@
 package com.example.bungeoppang
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.json.JSONObject
+
 
 class AdditionalInfo : AppCompatActivity(), ChangeMenu {
     private var address:String? = null
@@ -20,6 +26,12 @@ class AdditionalInfo : AppCompatActivity(), ChangeMenu {
     private lateinit var getResult: ActivityResultLauncher<Intent>
     private var menuView:RecyclerView? = null
     private var menuAdapter:MenuViewAdapter? = null
+    private lateinit var addressText: EditText
+    private lateinit var storeName: EditText
+    private lateinit var addressName: TextView
+    private var name:String? = null
+    private var comment:String? = null
+    private lateinit var commentEdit:EditText
 
     override fun changed(l: ArrayList<Int>) {
         list = l
@@ -44,11 +56,45 @@ class AdditionalInfo : AppCompatActivity(), ChangeMenu {
             menuView?.adapter = null
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.home) {
+            onBackPressed()
+        } else if (item.itemId == R.id.save) {
+            getInfoFromEdit()
+            val jsons = menuAdapter?.getAllJsons()
+            // Variable로 변경 필요
+            ServerConnect.sendStoreInfo(address!!, name!!, 12345678, "박현준", latitude, longitude, jsons, comment!!, this)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.save, menu)
+        return true
+    }
+
+    fun getInfoFromEdit(){
+        name = storeName.text.toString()
+        address += " "+addressText.text.toString()
+        comment = commentEdit.text.toString()
+    }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_additional_info)
+
+        commentEdit = findViewById(R.id.editComment)
+        getInfo()
+
+        addressName = findViewById(R.id.address_view)
+        addressName.text = address
+
+        addressText = findViewById(R.id.editAddress)
+        storeName = findViewById(R.id.editText)
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+        getSupportActionBar()?.setDisplayShowHomeEnabled(true)
 
         getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             result -> if(result.resultCode == RESULT_OK){
@@ -60,10 +106,28 @@ class AdditionalInfo : AppCompatActivity(), ChangeMenu {
 
         categoryAdapter = CategoryAdapter(kotlin.collections.arrayListOf(0), getResult, this)
 
-        getInfo()
+
         recyclerView = findViewById(R.id.category_view)
         recyclerView?.adapter = categoryAdapter
+        recyclerView?.layoutManager = object:GridLayoutManager(this, 5){
+            override fun canScrollHorizontally(): Boolean {
+                return false
+            }
+
+            override fun canScrollVertically(): Boolean {
+                return false
+            }
+        }
         menuView = findViewById(R.id.menu_recyclerview)
+        menuView?.layoutManager = object:LinearLayoutManager(this){
+            override fun canScrollHorizontally(): Boolean {
+                return false
+            }
+
+            override fun canScrollVertically(): Boolean {
+                return false
+            }
+        }
     }
 
     fun getInfo(){

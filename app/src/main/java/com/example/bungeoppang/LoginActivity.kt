@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
@@ -14,9 +15,14 @@ import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.KakaoSdkError
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
+import org.json.JSONObject
+import java.io.File
+import java.io.FileNotFoundException
 
 class LoginActivity : AppCompatActivity() {
     private var loginButton: ImageButton? = null
+    private var id:Long? = null
+    private var nickName:String? = null
     private var TAG: String = "Login"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -139,8 +145,31 @@ class LoginActivity : AppCompatActivity() {
                         "\n이메일: ${user.kakaoAccount?.email}" +
                         "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
                         "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
-                Variables.USER_ID = user.id
+                id = user.id
             }
         }
+    }
+
+    private fun makeLogFile(){
+        val file = File(application.filesDir,"login.json")
+
+        if(!file.exists()){
+            try{
+                val data = file.readText(Charsets.UTF_8)
+                val json = JSONObject(data)
+                Variables.USER_ID = json.getLong("id")
+                Variables.USER_NAME = json.getString("nickName")
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+
+            } catch(e: FileNotFoundException){
+                Toast.makeText(this, "로그인 실패! 로그인이 필요합니다.", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
+
     }
 }

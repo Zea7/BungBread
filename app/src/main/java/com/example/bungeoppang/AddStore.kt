@@ -24,6 +24,9 @@ class AddStore : AppCompatActivity() , MapView.MapViewEventListener, MapView.POI
     private var marker:MapPOIItem = MapPOIItem()
     private val TAG = "AppStore"
     private var address: String? = null
+    companion object{
+        var addStoreActivity:AddStore? = null
+    }
 
     override fun onBackPressed() {
         goBackToMain()
@@ -42,6 +45,8 @@ class AddStore : AppCompatActivity() , MapView.MapViewEventListener, MapView.POI
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_store)
+
+        addStoreActivity = this
 
         // 뒤로가기 버튼
         getSupportActionBar()?.setTitle("Gallery")
@@ -68,8 +73,8 @@ class AddStore : AppCompatActivity() , MapView.MapViewEventListener, MapView.POI
             intent.putExtra("longitude", longitude)
             intent.putExtra("address", address)
             startActivity(intent)
-            (map?.parent as ViewGroup).removeView(map)
-            MainActivity.main?.finish()
+//            (map?.parent as ViewGroup).removeView(map)
+//            MainActivity.main?.finish()
         }
 
         getInfo()
@@ -177,7 +182,7 @@ class AddStore : AppCompatActivity() , MapView.MapViewEventListener, MapView.POI
         text?.text = String.format("(%f, %f)", latitude, longitude)
     }
 
-    private fun goBackToMain(){
+    fun goBackToMain(){
         (map?.parent as ViewGroup).removeView(map)
         MainActivity.main?.finish()
         latitude = intent.getDoubleExtra("latitude", 33.452613)

@@ -7,8 +7,14 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import org.json.JSONArray
+import org.json.JSONObject
 
-class MenuListAdapter: RecyclerView.Adapter<MenuListAdapter.ListHolder>() {
+class MenuListAdapter(val category:String): RecyclerView.Adapter<MenuListAdapter.ListHolder>() {
+    private var menuName:String? = null
+    private var menuCount:Int? = null
+    private var menuPrice:Int? = null
+    private var holders:ArrayList<ListHolder> = ArrayList<ListHolder>()
     var count = 1
 
     class ListHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
@@ -29,7 +35,25 @@ class MenuListAdapter: RecyclerView.Adapter<MenuListAdapter.ListHolder>() {
     }
 
     override fun onBindViewHolder(holder: ListHolder, position: Int) {
+        holders.add(holder)
+    }
 
+    fun getInfoOfMenus():JSONArray{
+        val jsons = JSONArray()
+        for(i in  holders){
+            menuName  = i.menu_name.text.toString()
+            menuName += String.format(" %s", category)
+            menuCount = i.menu_count.text.toString().toInt()
+            menuPrice = i.menu_price.text.toString().toInt()
+            val json = JSONObject()
+            json.put("itemName", menuName)
+            json.put("count", menuCount)
+            json.put("price", menuPrice)
+
+            jsons.put(json)
+        }
+
+        return jsons
     }
 
     override fun getItemCount(): Int {
@@ -39,7 +63,7 @@ class MenuListAdapter: RecyclerView.Adapter<MenuListAdapter.ListHolder>() {
     fun increaseItems(){
         count++
         notifyItemInserted(count)
-        notifyItemRangeChanged(count, count)
+        notifyItemRangeChanged(count-1, count)
     }
 
     fun decreaseItems(context: Context){
@@ -48,6 +72,8 @@ class MenuListAdapter: RecyclerView.Adapter<MenuListAdapter.ListHolder>() {
             return
         }
         notifyItemRemoved(count)
-        notifyItemRangeChanged(count, count--)
+        notifyItemRangeChanged(count, count-1)
+        count -= 1
+        holders.removeAt(count)
     }
 }
