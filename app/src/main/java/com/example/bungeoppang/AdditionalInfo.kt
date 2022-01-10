@@ -63,7 +63,7 @@ class AdditionalInfo : AppCompatActivity(), ChangeMenu {
             getInfoFromEdit()
             val jsons = menuAdapter?.getAllJsons()
             // Variable로 변경 필요
-            ServerConnect.sendStoreInfo(address!!, name!!, 12345678, "박현준", latitude, longitude, jsons, comment!!, this)
+            //ServerConnect.sendStoreInfo(address!!, name!!, 12345678, "박현준", latitude, longitude, jsons, comment!!, this)
         }
         return super.onOptionsItemSelected(item)
     }

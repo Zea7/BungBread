@@ -1,145 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="40dp"
-    tools:context=".InfoFragment">
+    android:paddingTop="?actionBarSize"
+    tools:context=".info.InfoFragment">
 
     <ImageView
-        android:id="@+id/profile_img"
+        android:id="@+id/iv_profile"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:layout_marginTop="8dp"
         android:scaleType="centerCrop"
         android:src="@drawable/profile"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/nickname"
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:gravity="center"
-        android:text="안녕"
+        android:text="박현준"
         android:textSize="30sp"
+        android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile_img" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="420dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/nickname"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/starrred_store_layer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
-
-            <TextView
-                android:id="@+id/starred_store"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:text="찜한 가게"
-                android:textSize="20sp" />
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/right_arrow" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/my_store_layer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
-
-            <TextView
-                android:id="@+id/my_store"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:text="내가 제보한 가게"
-                android:textSize="20sp" />
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/right_arrow" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/my_post_layer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
-
-            <TextView
-                android:id="@+id/my_post"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:text="내가 쓴 글"
-                android:textSize="20sp" />
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/right_arrow" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/scrab_post_layer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
-
-            <TextView
-                android:id="@+id/scrab_post"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:text="댓글 단 글"
-                android:textSize="20sp" />
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/right_arrow" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/reply_post_layer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
-
-            <TextView
-                android:id="@+id/reply_post"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:text="스크랩한 글"
-                android:textSize="20sp" />
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/right_arrow" />
-        </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@id/iv_profile" />
 
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_picked_store"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:text="찜한 가게"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_picked_more"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
+    <ImageView
+        android:id="@+id/iv_picked_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/right_arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_picked_store"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_picked_store" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_picked"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_picked_more"
+        app:layout_constraintStart_toStartOf="@+id/tv_picked_store"
+        app:layout_constraintTop_toBottomOf="@+id/tv_picked_store" />
+
+    <ImageView
+        android:id="@+id/iv_registered_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/right_arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_registered_store"
+        app:layout_constraintEnd_toEndOf="@+id/rv_picked"
+        app:layout_constraintTop_toTopOf="@+id/tv_registered_store" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_registered"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_registered_more"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_registered_store"
+        app:layout_constraintTop_toBottomOf="@+id/tv_registered_store" />
+
+    <TextView
+        android:id="@+id/tv_registered_store"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="내가 등록한 가게"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_registered_more"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/rv_picked"
+        app:layout_constraintTop_toBottomOf="@+id/rv_picked" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

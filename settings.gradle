@@ -9,4 +9,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "BungEoPpang"
 include ':app'
-include ':community'

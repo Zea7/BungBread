@@ -2,20 +2,17 @@ package com.example.bungeoppang
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TableLayout
-import androidx.fragment.app.FragmentContainerView
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 
 
-import android.R.id.tabs
 import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.bungeoppang.info.InfoFragment
 import com.gun0912.tedpermission.TedPermission
 import java.util.ArrayList
-import java.util.jar.Manifest
 import com.gun0912.tedpermission.PermissionListener as PermissionListener
 
 class MainActivity : AppCompatActivity() {
@@ -58,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         var fragment2:MapFragment = MapFragment.newInstance()
 
         //Information of user Fragment
-        var fragment3:InfoFragment = InfoFragment.newInstance()
+        var fragment3: InfoFragment = InfoFragment.newInstance()
 
         var icons = arrayOf(R.drawable.magnifier, R.drawable.map, R.drawable.person)
 

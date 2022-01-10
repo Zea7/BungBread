@@ -157,8 +157,8 @@ class LoginActivity : AppCompatActivity() {
             try{
                 val data = file.readText(Charsets.UTF_8)
                 val json = JSONObject(data)
-                Variables.USER_ID = json.getLong("id")
-                Variables.USER_NAME = json.getString("nickName")
+                //Variables.USER_ID = json.getLong("id")
+                //Variables.USER_NAME = json.getString("nickName")
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
