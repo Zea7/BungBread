@@ -13,3 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Env variables (API KEY)
+**/Variables.kt
+**/env.xml
+app/src/main/res/values/env.xml
