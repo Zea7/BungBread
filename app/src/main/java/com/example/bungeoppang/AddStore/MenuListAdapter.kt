@@ -1,4 +1,4 @@
-package com.example.bungeoppang
+package com.example.bungeoppang.AddStore
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bungeoppang.R
 import org.json.JSONArray
 import org.json.JSONObject
 

@@ -1,4 +1,4 @@
-package com.example.bungeoppang
+package com.example.bungeoppang.AddStore
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.example.bungeoppang.MainActivity
+import com.example.bungeoppang.R
+import com.example.bungeoppang.Variables
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapReverseGeoCoder
@@ -25,7 +27,7 @@ class AddStore : AppCompatActivity() , MapView.MapViewEventListener, MapView.POI
     private val TAG = "AppStore"
     private var address: String? = null
     companion object{
-        var addStoreActivity:AddStore? = null
+        var addStoreActivity: AddStore? = null
     }
 
     override fun onBackPressed() {

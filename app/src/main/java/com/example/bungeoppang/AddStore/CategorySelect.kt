@@ -1,11 +1,10 @@
-package com.example.bungeoppang
+package com.example.bungeoppang.AddStore
 
 import android.content.Intent
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.bungeoppang.R
 import java.io.Serializable
 
 class CategorySelect : AppCompatActivity(), Serializable {
@@ -50,9 +50,19 @@ class CategorySelect : AppCompatActivity(), Serializable {
 
     class CategorySelectAdapter(list:ArrayList<Int>?): RecyclerView.Adapter<CategorySelectAdapter.SelectHolder>(){
         var selected:ArrayList<Int> = getSelected(list)
-        private val items:Array<Int> = arrayOf(R.drawable.category_1, R.drawable.category_2,R.drawable.category_3,
-            R.drawable.category_4,R.drawable.category_5,R.drawable.category_6,R.drawable.category_7
-            ,R.drawable.category_8,R.drawable.category_9,R.drawable.category_10)
+        private val items:Array<Int> = arrayOf(
+            R.drawable.category_1,
+            R.drawable.category_2,
+            R.drawable.category_3,
+            R.drawable.category_4,
+            R.drawable.category_5,
+            R.drawable.category_6,
+            R.drawable.category_7
+            ,
+            R.drawable.category_8,
+            R.drawable.category_9,
+            R.drawable.category_10
+        )
         class SelectHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
             val img:ImageView
             init{

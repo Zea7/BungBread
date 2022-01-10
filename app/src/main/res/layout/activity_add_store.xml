@@ -5,7 +5,7 @@
     android:id="@+id/add_group"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddStore">
+    tools:context=".AddStore.AddStore">
 
 
     <net.daum.mf.map.api.MapView
@@ -28,7 +28,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="65dp"
-        android:text="안녕"
         android:textSize="20sp"/>
 
 

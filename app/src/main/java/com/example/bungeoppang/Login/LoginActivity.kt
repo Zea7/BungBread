@@ -1,33 +1,37 @@
-package com.example.bungeoppang
+package com.example.bungeoppang.Login
 
 import android.content.Intent
-import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
-import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.example.bungeoppang.MainActivity
+import com.example.bungeoppang.R
+import com.example.bungeoppang.ServerConnect
+import com.example.bungeoppang.Variables
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.KakaoSdkError
-import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
-import org.json.JSONObject
-import java.io.File
-import java.io.FileNotFoundException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
+    companion object{
+        lateinit var loginActivity: LoginActivity
+    }
     private var loginButton: ImageButton? = null
-    private var id:Long? = null
-    private var nickName:String? = null
     private var TAG: String = "Login"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        loginActivity = this
         loginButton = findViewById(R.id.login_button)
         KakaoSdk.init(this, Variables.NATIVE_APP_KEY)
 
@@ -45,9 +49,6 @@ class LoginActivity : AppCompatActivity() {
                 }
                 else {
                     getUserData()
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
                 }
             }
         }
@@ -75,9 +76,7 @@ class LoginActivity : AppCompatActivity() {
             }
             else if (token != null) {
                 Log.i(TAG, "로그인 성공 ${token.accessToken}")
-                val intent = Intent(baseContext, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                getUserData()
             }
         }
 
@@ -135,41 +134,40 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun getUserData(){
+        var id:Long = 0
+        val intent1 = Intent(this, NickNameActivity::class.java)
+        val intent2 = Intent(this, MainActivity::class.java)
+
         UserApiClient.instance.me { user, error ->
             if (error != null) {
                 Log.e(TAG, "사용자 정보 요청 실패", error)
             }
             else if (user != null) {
+                var s:Boolean = false
                 Log.i(TAG, "사용자 정보 요청 성공" +
                         "\n회원번호: ${user.id}" +
                         "\n이메일: ${user.kakaoAccount?.email}" +
                         "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
                         "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
-                id = user.id
+                CoroutineScope(Dispatchers.Main).launch{
+                    CoroutineScope(Dispatchers.IO).launch{
+                        s = ServerConnect.checkUserWithId(user.id!!, baseContext)
+                    }.join()
+
+                    Log.d(TAG, s.toString())
+                    if(!s){
+                        intent1.putExtra("id", user.id)
+                        Log.d(TAG, String.format("%d", user.id))
+                        startActivity(intent1)
+                        finish()
+                    } else{
+                        startActivity(intent2)
+                        finish()
+                    }
+                }
             }
         }
     }
 
-    private fun makeLogFile(){
-        val file = File(application.filesDir,"login.json")
 
-        if(!file.exists()){
-            try{
-                val data = file.readText(Charsets.UTF_8)
-                val json = JSONObject(data)
-                Variables.USER_ID = json.getLong("id")
-                Variables.USER_NAME = json.getString("nickName")
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-
-            } catch(e: FileNotFoundException){
-                Toast.makeText(this, "로그인 실패! 로그인이 필요합니다.", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-        }
-
-    }
 }

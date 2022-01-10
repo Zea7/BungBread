@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFragment">
+    tools:context=".MainFragment"
+    android:paddingTop="?attr/actionBarSize">
 
     <net.daum.mf.map.api.MapView
         android:id="@+id/map_view"
@@ -20,6 +21,17 @@
         android:textSize="20sp"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="20dp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/target"
+        android:id="@+id/my_location"
+        android:layout_gravity="top|right"
+        android:layout_margin="20dp"
+        android:background="#00ff0000"/>
+
+
 
 
 

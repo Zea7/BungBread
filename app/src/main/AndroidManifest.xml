@@ -18,8 +18,11 @@
         android:theme="@style/Theme.BungEoPpang"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Splash"
-            android:exported="true" >
+            android:name=".Login.NickNameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Login.Splash"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,13 +30,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CategorySelect"
+            android:name=".AddStore.CategorySelect"
             android:exported="false" />
         <activity
-            android:name=".AdditionalInfo"
+            android:name=".AddStore.AdditionalInfo"
             android:exported="false" />
         <activity
-            android:name=".AddStore"
+            android:name=".AddStore.AddStore"
             android:exported="false" />
         <activity
             android:name=".Temp"
@@ -47,10 +50,8 @@
             android:value="@string/MAP_API_KEY" />
 
         <activity
-            android:name=".LoginActivity"
-            android:exported="true">
-
-        </activity>
+            android:name=".Login.LoginActivity"
+            android:exported="true"></activity>
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">

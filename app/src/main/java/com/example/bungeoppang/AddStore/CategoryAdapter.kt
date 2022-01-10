@@ -1,4 +1,4 @@
-package com.example.bungeoppang
+package com.example.bungeoppang.AddStore
 
 import android.content.Context
 import android.content.Intent
@@ -7,17 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.bungeoppang.R
 import java.io.Serializable
 
 
-class CategoryAdapter(item_list: ArrayList<Int>, getResult: ActivityResultLauncher<Intent>, var changeMenuInterface:ChangeMenu) :
+class CategoryAdapter(item_list: ArrayList<Int>, getResult: ActivityResultLauncher<Intent>, var changeMenuInterface: ChangeMenu) :
     RecyclerView.Adapter<CategoryAdapter.CategoryHolder>(), Serializable{
-    private val items:Array<Int> = arrayOf(R.drawable.plus, R.drawable.category_1, R.drawable.category_2,R.drawable.category_3,
-        R.drawable.category_4,R.drawable.category_5,R.drawable.category_6,R.drawable.category_7
-    ,R.drawable.category_8,R.drawable.category_9,R.drawable.category_10)
+    private val items:Array<Int> = arrayOf(
+        R.drawable.plus, R.drawable.category_1, R.drawable.category_2, R.drawable.category_3,
+        R.drawable.category_4, R.drawable.category_5, R.drawable.category_6, R.drawable.category_7
+    , R.drawable.category_8, R.drawable.category_9, R.drawable.category_10
+    )
     private var list:ArrayList<Int> = getList(item_list.sorted())
     private var getResult = getResult
 
