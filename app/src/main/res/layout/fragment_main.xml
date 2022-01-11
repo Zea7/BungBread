@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFragment"
-    android:paddingTop="?attr/actionBarSize">
+    tools:context=".MainFragment">
 
     <net.daum.mf.map.api.MapView
         android:id="@+id/map_view"

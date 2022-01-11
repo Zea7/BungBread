@@ -7,7 +7,10 @@ import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import android.content.pm.PackageManager
+import android.icu.text.IDNA
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -23,6 +26,10 @@ import java.util.ArrayList
 import com.gun0912.tedpermission.PermissionListener as PermissionListener
 
 class MainActivity : AppCompatActivity() {
+    lateinit var fragment1: MainFragment
+    lateinit var fragment2: InfoFragment
+    var menuOn = false
+
     companion object{
         var latitude:Double = 0.0
         var longitude:Double = 0.0
@@ -66,43 +73,33 @@ class MainActivity : AppCompatActivity() {
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 ).check()
 
+        fragment1 = MainFragment.newInstance()
+        fragment2 = InfoFragment.newInstance()
+        supportFragmentManager.beginTransaction().add(R.id.tab_fragment, fragment1).commit()
+    }
 
-        //Main Fragment
-        var fragment1: MainFragment = MainFragment.newInstance()
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_option, menu)
+        return true
+    }
 
-        //Map Fragment
-        var fragment2: MapFragment = MapFragment.newInstance()
-
-        //Information of user Fragment
-        var fragment3: InfoFragment = InfoFragment.newInstance()
-
-        var icons = arrayOf(R.drawable.magnifier, R.drawable.map, R.drawable.person)
-        var tab: TabLayout = findViewById(R.id.main_tab)
-
-        with(tab) {
-            for (i: Int in 0..2)
-                getTabAt(i)?.setIcon(icons.get(i))
-            supportFragmentManager.beginTransaction().add(R.id.tab_fragment, fragment1).commit();
-
-            addOnTabSelectedListener(object : OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    val position = tab!!.position
-                    var selected: Fragment = fragment1
-                    if (position == 0) selected = fragment1 else if (position == 1) selected =
-                        fragment2 else if (position == 2) selected = fragment3
-                    supportFragmentManager.beginTransaction().replace(R.id.tab_fragment, selected)
-                        .commit();
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-                }
-
-                override fun onTabReselected(tab: TabLayout.Tab?) {
-
-                }
-
-            })
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.mypage -> {
+                supportFragmentManager.beginTransaction().replace(R.id.tab_fragment, fragment2)
+                    .commit()
+                menuOn = true
+            }
         }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        if(menuOn){
+            supportFragmentManager.beginTransaction().replace(R.id.tab_fragment, fragment1)
+                .commit()
+            menuOn = false
+        }
+        else super.onBackPressed()
     }
 }

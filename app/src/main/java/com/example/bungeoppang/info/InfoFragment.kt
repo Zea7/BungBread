@@ -24,14 +24,10 @@ import retrofit2.Response
 class InfoFragment : Fragment() {
     private lateinit var pickedRV: RecyclerView
     private lateinit var registeredRV: RecyclerView
-    private lateinit var writtenRV: RecyclerView
-    private lateinit var commentedRV: RecyclerView
-
     private lateinit var adapter: StoreAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
