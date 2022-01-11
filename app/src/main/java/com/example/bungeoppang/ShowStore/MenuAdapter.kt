@@ -10,6 +10,8 @@ import com.example.bungeoppang.retrofit.Menu
 
 class MenuAdapter(val menu:List<Menu>) : RecyclerView.Adapter<MenuAdapter.MenuShow>() {
 
+    private val list:ArrayList<String> = ArrayList<String>()
+
 
     class MenuShow(itemView: View) : RecyclerView.ViewHolder(itemView){
         var price:TextView
@@ -32,11 +34,23 @@ class MenuAdapter(val menu:List<Menu>) : RecyclerView.Adapter<MenuAdapter.MenuSh
     override fun onBindViewHolder(holder: MenuShow, position: Int) {
         val menu_item = menu[position]
         holder.menu.text = menu_item.itemName
+        list.add(menu_item.itemName.split(" ")[menu_item.itemName.split(" ").size -1])
         holder.count.text = menu_item.count.toString() + "개"
         holder.price.text = menu_item.price.toString() +"원"
     }
 
     override fun getItemCount(): Int {
         return menu.size
+    }
+
+    fun getImage():Int{
+        val hash:HashMap<String, Int> = HashMap()
+        for(i in list){
+            var x  = 1
+            if(hash.containsKey(i))
+                x = hash.get(i)?.plus(1) ?: 0
+            hash.put(i, x)
+        }
+        return 1
     }
 }

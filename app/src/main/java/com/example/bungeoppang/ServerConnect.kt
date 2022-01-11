@@ -101,7 +101,7 @@ class ServerConnect {
                 val idd = response!!.body()?.user?.userId?.toLong()
                 val namee = response!!.body()?.user?.nickName
                 //makeFileOrChange(idd!!, namee!!, context)
-                printLoginFile(context)
+
                 //Toast.makeText(context, "로그인이 완료되었습니다.", Toast.LENGTH_SHORT).show()
             }
             else{
@@ -128,7 +128,7 @@ class ServerConnect {
             Log.d("ServerConnectionToCheckUserWithID", response!!.body().toString())
             if(response!!.body()?.ok == true){
                 answer = true
-                printLoginFile(context)
+
             }
             return answer
         }
@@ -148,7 +148,7 @@ class ServerConnect {
             Log.d("ServerConnectionToCheckUserWithName", response!!.body().toString())
             if(response!!.body()?.ok == true){
                 answer = true
-                printLoginFile(context)
+
             }
             return answer
 
