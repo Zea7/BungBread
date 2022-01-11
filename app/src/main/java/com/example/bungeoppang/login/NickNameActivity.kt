@@ -1,4 +1,4 @@
-package com.example.bungeoppang.Login
+package com.example.bungeoppang.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -45,7 +45,6 @@ class NickNameActivity : AppCompatActivity() {
                     startActivity(intent1)
                 }
             }
-
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.bungeoppang.info
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bungeoppang.R
+import com.example.bungeoppang.Variables
 import com.example.bungeoppang.api.ApiClient
 import com.example.bungeoppang.api.ApiInterface
 import com.example.bungeoppang.data.Coord
@@ -53,7 +55,8 @@ class InfoFragment : Fragment() {
 
         val apiClient = ApiClient?.instance?.create(ApiInterface::class.java)
 
-        apiClient?.getUserByUserId(2067452916)?.enqueue(object : Callback<User>{
+        val userId = Variables.USER_ID
+        apiClient?.getUserByUserId(userId)?.enqueue(object : Callback<User>{
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 val user = response.body()?.user
                 tvName.text = user?.nickName
@@ -62,6 +65,7 @@ class InfoFragment : Fragment() {
                 user?.picked?.forEach {
                     Log.d("sss", it)
                     apiClient.getStoreByStoreId(it).enqueue(object  : Callback<Stores.StoreItem>{
+                        @SuppressLint("NotifyDataSetChanged")
                         override fun onResponse(
                             call: Call<Stores.StoreItem>,
                             response: Response<Stores.StoreItem>
@@ -84,7 +88,7 @@ class InfoFragment : Fragment() {
             }
 
         })
-        apiClient?.getStoresByUserId(2067452916)?.enqueue(object : Callback<Stores>{
+        apiClient?.getStoresByUserId(userId)?.enqueue(object : Callback<Stores>{
             override fun onResponse(call: Call<Stores>, response: Response<Stores>) {
                 val stores = response.body()
                 registeredRV.adapter = StoreAdapter(context!!, stores!!, layoutInflater)

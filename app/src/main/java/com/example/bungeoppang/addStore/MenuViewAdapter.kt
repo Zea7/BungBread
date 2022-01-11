@@ -1,4 +1,4 @@
-package com.example.bungeoppang.AddStore
+package com.example.bungeoppang.addStore
 
 import android.view.LayoutInflater
 import android.view.View

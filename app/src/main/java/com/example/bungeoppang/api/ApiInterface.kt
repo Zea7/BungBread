@@ -13,12 +13,12 @@ import retrofit2.http.Query
 interface ApiInterface {
     @GET("users/user")
     fun getUserByUserId(
-        @Query("user_id") userId: Int
+        @Query("user_id") userId: Long
     ): Call<User>
 
     @GET("stores/user/{user_id}")
     fun getStoresByUserId(
-        @Path("user_id") userId: Int,
+        @Path("user_id") userId: Long,
     ): Call<Stores>
 
     @GET("stores/store/{store_id}")

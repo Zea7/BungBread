@@ -16,16 +16,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.core.app.ActivityCompat
-import com.example.bungeoppang.AddStore.AddStore
+import com.example.bungeoppang.addStore.AddStore
 import com.example.bungeoppang.retrofit.DistanceStoreItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
-import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
 
