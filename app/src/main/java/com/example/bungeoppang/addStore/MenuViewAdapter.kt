@@ -1,10 +1,13 @@
 package com.example.bungeoppang.addStore
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.contentValuesOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -13,6 +16,7 @@ import org.json.JSONArray
 
 class MenuViewAdapter(list: ArrayList<Int>): RecyclerView.Adapter<MenuViewAdapter.MenuHolder>() {
     private val list:ArrayList<Int> = list
+    private lateinit var context: Context
     private val items:Array<Int> = arrayOf(
         R.drawable.category_1, R.drawable.category_2, R.drawable.category_3,
         R.drawable.category_4, R.drawable.category_5, R.drawable.category_6, R.drawable.category_7
@@ -38,12 +42,17 @@ class MenuViewAdapter(list: ArrayList<Int>): RecyclerView.Adapter<MenuViewAdapte
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.menu_list_item, parent, false)
+        context = parent.context
 
         return MenuHolder(view)
     }
 
-    fun getAllJsons(): JSONArray {
+    fun getAllJsons(): JSONArray? {
         var jsons = JSONArray()
+        if(holders.size == 0){
+            Toast.makeText(context, "하나 이상의 메뉴 카테고리를 선택해주세요!", Toast.LENGTH_SHORT).show()
+            return null
+        }
         for(i in holders){
             val json = i.getInfoOfMenus()
             for(j in 0 until json.length()){
@@ -56,7 +65,7 @@ class MenuViewAdapter(list: ArrayList<Int>): RecyclerView.Adapter<MenuViewAdapte
 
     override fun onBindViewHolder(holder: MenuHolder, position: Int) {
         var pos = list[position] - 1
-        val context = holder.icon.context
+        context = holder.icon.context
         Glide.with(context).load(items[pos]).into(holder.icon)
         holder.menu.text = menus[pos]
         val adapterList = MenuListAdapter(menus[pos])

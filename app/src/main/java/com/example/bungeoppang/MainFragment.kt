@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.core.app.ActivityCompat
+import com.example.bungeoppang.ShowStore.ShowStore
 import com.example.bungeoppang.addStore.AddStoreActivity
 import com.example.bungeoppang.retrofit.DistanceStoreItem
 import kotlinx.coroutines.CoroutineScope
@@ -27,7 +28,7 @@ import net.daum.mf.map.api.MapView
 import org.json.JSONObject
 import java.lang.Exception
 
-class MainFragment : Fragment(){
+class MainFragment : Fragment() ,MapView.POIItemEventListener{
     private lateinit var locationManager: LocationManager
     private var latitude:Double = 0.0
     private var longitude:Double = 0.0
@@ -120,6 +121,7 @@ class MainFragment : Fragment(){
             marker.mapPoint = MapPoint.mapPointWithGeoCoord(temp.getDouble("latitude"), temp.getDouble("longitude"))
             marker.itemName = temp.getString("storeName")
             map.addPOIItem(marker)
+            map.setPOIItemEventListener(this)
         }
 
         return array
@@ -173,5 +175,30 @@ class MainFragment : Fragment(){
         customMarker.customImageResourceId = R.drawable.user_marker
         customMarker.isCustomImageAutoscale = false
         return customMarker
+    }
+
+    override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
+        if(p1!!.markerType != MapPOIItem.MarkerType.YellowPin) return
+        val point = p1.mapPoint
+        val intent = Intent(context, ShowStore::class.java)
+        intent.putExtra("latitude", point.mapPointGeoCoord.latitude )
+        intent.putExtra("longitude", point.mapPointGeoCoord.longitude)
+        startActivity(intent)
+
+    }
+
+    override fun onCalloutBalloonOfPOIItemTouched(p0: MapView?, p1: MapPOIItem?) {
+
+    }
+
+    override fun onCalloutBalloonOfPOIItemTouched(
+        p0: MapView?,
+        p1: MapPOIItem?,
+        p2: MapPOIItem.CalloutBalloonButtonType?
+    ) {
+
+    }
+
+    override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {
     }
 }

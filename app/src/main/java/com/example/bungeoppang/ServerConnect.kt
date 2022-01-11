@@ -10,6 +10,7 @@ import com.example.bungeoppang.retrofit.DistanceStore
 import com.example.bungeoppang.retrofit.DistanceStoreItem
 import com.example.bungeoppang.retrofit.RetrofitService
 import com.example.bungeoppang.retrofit.UserResponse
+import com.example.bungeoppang.retrofit.*
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import kotlinx.coroutines.CoroutineScope
@@ -100,7 +101,7 @@ class ServerConnect {
                 val idd = response!!.body()?.user?.userId?.toLong()
                 val namee = response!!.body()?.user?.nickName
                 //makeFileOrChange(idd!!, namee!!, context)
-                printLoginFile(context)
+
                 //Toast.makeText(context, "로그인이 완료되었습니다.", Toast.LENGTH_SHORT).show()
             }
             else{
@@ -127,7 +128,7 @@ class ServerConnect {
             Log.d("ServerConnectionToCheckUserWithID", response!!.body().toString())
             if(response!!.body()?.ok == true){
                 answer = true
-                printLoginFile(context)
+
             }
             return answer
         }
@@ -147,7 +148,7 @@ class ServerConnect {
             Log.d("ServerConnectionToCheckUserWithName", response!!.body().toString())
             if(response!!.body()?.ok == true){
                 answer = true
-                printLoginFile(context)
+
             }
             return answer
 
@@ -185,7 +186,34 @@ class ServerConnect {
             return jsons
         }
 
-        private fun printLoginFile(context:Context){
+        suspend fun storeget(latitude:Double, longitude:Double, context:Context):Response<StoreLocation>{
+
+            var result: Response<StoreLocation>?=null
+            CoroutineScope(Dispatchers.IO).launch{
+                kotlin.runCatching {
+                    result = server.getStoresByLocation(longitude, latitude).execute()
+                }
+            }.join()
+
+            return result!!
+        }
+
+        suspend fun getStoreByLocation(latitude:Double, longitude: Double, context:Context):StoreLocation{
+            var answer:StoreLocation? = null
+            lateinit var result:Response<StoreLocation>
+            CoroutineScope(Dispatchers.IO).launch{
+                result = storeget(latitude, longitude, context)
+            }.join()
+            val gson = Gson()
+            Log.d("Result", result.body()!!.toString())
+            if(result.body()!!.ok){
+                answer = result.body()!!
+            }
+            return answer!!
+        }
+
+
+        fun makeFileOrChange(id:Long, name:String, context:Context){
             val file = File(context.filesDir,"login.json")
             try {
                 val data = file.readText(Charsets.UTF_8)
@@ -198,6 +226,18 @@ class ServerConnect {
                 e.printStackTrace()
                 Log.e("ServerLogin", "No file")
             }
+        }
+
+        suspend fun pickStoreByUser(id:Long, store_id:String):Boolean{
+            var answer = false
+            lateinit var response:Response<StorePick>
+            CoroutineScope(Dispatchers.IO).launch {
+                kotlin.runCatching {
+                    response = server.pickStore(id, store_id).execute()
+                }
+            }.join()
+            if(response.body()!!.ok) answer = true
+            return answer
         }
     }
 }

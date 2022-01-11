@@ -30,9 +30,9 @@ class AddStoreActivity : AppCompatActivity() , MapView.MapViewEventListener, Map
         var addStoreActivity: AddStoreActivity? = null
     }
 
-//    override fun onBackPressed() {
-//        goBackToMain()
-//    }
+    override fun onBackPressed() {
+        goBackToMain()
+    }
 
     // App bar 버튼 동작
 //    override fun onOptionsItemSelected(item: MenuItem): Boolean {

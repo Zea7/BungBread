@@ -19,6 +19,9 @@
         android:theme="@style/Theme.BungEoPpang"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ShowStore.ShowStore"
+            android:exported="false" />
+        <activity
             android:name=".login.NickNameActivity"
             android:exported="false" />
         <activity

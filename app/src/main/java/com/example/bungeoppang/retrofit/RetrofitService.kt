@@ -18,8 +18,13 @@ interface RetrofitService {
 
     @GET("stores/{distance}/{x}/{y}")
     fun getStoresInDistance(@Path("distance") distance:Int, @Path("x") x:Double, @Path("y") y:Double):Call<DistanceStore>
-}
 
+    @GET("stores/store/coord/{x}/{y}")
+    fun getStoresByLocation(@Path("x") x:Double, @Path("y") y:Double):Call<StoreLocation>
+
+    @POST("users/pick")
+    fun pickStore(@Query("user_id") id:Long, @Query("store_id") store_id:String):Call<StorePick>
+}
 
 // 회원 정보 조회 응답 바디
 data class UserResponse(
@@ -64,4 +69,39 @@ data class Menu(
 data class Registrant(
     val id: Int,
     val nickName: String
+)
+
+
+data class StoreLocation(
+    val ok: Boolean,
+    val store: Store
+)
+
+data class Store(
+    val __v: Int,
+    val _id: String,
+    val address: String,
+    val comments: List<Any>,
+    val createdOrEditedAt: String,
+    val desc: String,
+    val menus: List<Menu>,
+    val registrant: Registrant,
+    val storeName: String,
+    val x: Double,
+    val y: Double
+)
+
+
+data class Comment(
+    val __v: Int,
+    val _id: String,
+    val contents: String,
+    val createdAt: String,
+    val writer: Int
+)
+
+
+data class StorePick(
+    val ok: Boolean,
+    val user: User
 )
