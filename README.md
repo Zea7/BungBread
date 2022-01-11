@@ -26,7 +26,7 @@
 
 ## Libraries
 
-- [Retrofit](https://square.github.io/retrofit/) + [Gson](https://github.com/google/gson) : JSON 데이터를 활용한 REST API 통신![image]
+- [Retrofit](https://square.github.io/retrofit/) + [Gson](https://github.com/google/gson) : JSON 데이터를 활용한 REST API 통신
 - [Glide](https://github.com/bumptech/glide) : 빠르고 정확한 이미지 로딩
 - [TedPermission](https://github.com/ParkSangGwon/TedPermission) : 안드로이드 시스템으로부터의 권환 획득 로직 간소화
 - [DaumMap](https://www.ncloud.com/product/applicationService/maps) : 다음 지도뷰를 활용한 화면 구성
