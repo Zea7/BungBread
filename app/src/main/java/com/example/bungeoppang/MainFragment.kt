@@ -115,7 +115,8 @@ class MainFragment : Fragment(){
             temp.put("menus", json.menus)
             array.add(temp)
             val marker = MapPOIItem()
-            marker.selectedMarkerType = MapPOIItem.MarkerType.YellowPin
+            marker.markerType = MapPOIItem.MarkerType.YellowPin
+            marker.selectedMarkerType = MapPOIItem.MarkerType.BluePin
             marker.mapPoint = MapPoint.mapPointWithGeoCoord(temp.getDouble("latitude"), temp.getDouble("longitude"))
             marker.itemName = temp.getString("storeName")
             map.addPOIItem(marker)

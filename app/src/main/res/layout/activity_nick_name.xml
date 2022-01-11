@@ -7,6 +7,7 @@
     tools:context=".login.NickNameActivity">
 
     <EditText
+        android:background="@drawable/et_background"
         android:id="@+id/enter_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,8 +21,11 @@
         android:id="@+id/nickname_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/enter_nickname"
+        android:layout_marginTop="16dp"
+        android:text="저장"
+        app:layout_constraintEnd_toEndOf="@+id/enter_nickname"
         app:layout_constraintLeft_toLeftOf="@id/enter_nickname"
-        android:text="저장"/>
+        app:layout_constraintStart_toStartOf="@+id/enter_nickname"
+        app:layout_constraintTop_toBottomOf="@id/enter_nickname" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
