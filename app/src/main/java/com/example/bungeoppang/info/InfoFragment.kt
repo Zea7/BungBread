@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.bungeoppang.R
 import com.example.bungeoppang.Variables
 import com.example.bungeoppang.api.ApiClient
@@ -39,6 +40,10 @@ class InfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Glide.with(this).load(Variables.profileUrl).into(view.findViewById(R.id.iv_profile))
+
+
         val tvName: TextView = view.findViewById(R.id.tv_name)
         pickedRV = view.findViewById(R.id.rv_picked)
         pickedRV.layoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }

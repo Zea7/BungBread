@@ -152,6 +152,8 @@ class LoginActivity : AppCompatActivity() {
                         "\n이메일: ${user.kakaoAccount?.email}" +
                         "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
                         "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+                Variables.profileUrl = user.kakaoAccount?.profile?.thumbnailImageUrl!!
+                
                 CoroutineScope(Dispatchers.Main).launch{
                     CoroutineScope(Dispatchers.IO).launch{
                         s = ServerConnect.checkUserWithId(user.id!!, baseContext)
