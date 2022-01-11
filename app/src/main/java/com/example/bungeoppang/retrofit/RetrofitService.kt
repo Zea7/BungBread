@@ -1,5 +1,6 @@
 package com.example.bungeoppang.retrofit
 
+import com.example.bungeoppang.ServerConnect
 import com.google.gson.JsonObject
 import org.json.JSONObject
 import retrofit2.Call
@@ -13,7 +14,7 @@ interface RetrofitService {
     fun checkUserWithId(@Query("user_id") id:Long):Call<UserResponse>
 
     @POST("users/register")
-    fun registerUser(@Body user_body:JSONObject):Call<UserResponse>
+    fun registerUser(@Body userpost: ServerConnect.Companion.UserPost):Call<UserResponse>
 
     @GET("stores/{distance}/{x}/{y}")
     fun getStoresInDistance(@Path("distance") distance:Int, @Path("x") x:Double, @Path("y") y:Double):Call<DistanceStore>

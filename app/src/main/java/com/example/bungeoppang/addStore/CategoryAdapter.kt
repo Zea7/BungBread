@@ -1,4 +1,4 @@
-package com.example.bungeoppang.AddStore
+package com.example.bungeoppang.addStore
 
 import android.content.Context
 import android.content.Intent

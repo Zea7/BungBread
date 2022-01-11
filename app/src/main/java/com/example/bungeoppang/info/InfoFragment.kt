@@ -1,5 +1,6 @@
 package com.example.bungeoppang.info
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,7 +10,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.bungeoppang.R
+import com.example.bungeoppang.Variables
 import com.example.bungeoppang.api.ApiClient
 import com.example.bungeoppang.api.ApiInterface
 import com.example.bungeoppang.data.Coord
@@ -22,14 +25,10 @@ import retrofit2.Response
 class InfoFragment : Fragment() {
     private lateinit var pickedRV: RecyclerView
     private lateinit var registeredRV: RecyclerView
-    private lateinit var writtenRV: RecyclerView
-    private lateinit var commentedRV: RecyclerView
-
     private lateinit var adapter: StoreAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -41,6 +40,10 @@ class InfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Glide.with(this).load(Variables.profileUrl).into(view.findViewById(R.id.iv_profile))
+
+
         val tvName: TextView = view.findViewById(R.id.tv_name)
         pickedRV = view.findViewById(R.id.rv_picked)
         pickedRV.layoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
@@ -53,7 +56,8 @@ class InfoFragment : Fragment() {
 
         val apiClient = ApiClient?.instance?.create(ApiInterface::class.java)
 
-        apiClient?.getUserByUserId(2067452916)?.enqueue(object : Callback<User>{
+        val userId = Variables.USER_ID
+        apiClient?.getUserByUserId(userId)?.enqueue(object : Callback<User>{
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 val user = response.body()?.user
                 tvName.text = user?.nickName
@@ -62,6 +66,7 @@ class InfoFragment : Fragment() {
                 user?.picked?.forEach {
                     Log.d("sss", it)
                     apiClient.getStoreByStoreId(it).enqueue(object  : Callback<Stores.StoreItem>{
+                        @SuppressLint("NotifyDataSetChanged")
                         override fun onResponse(
                             call: Call<Stores.StoreItem>,
                             response: Response<Stores.StoreItem>
@@ -84,7 +89,7 @@ class InfoFragment : Fragment() {
             }
 
         })
-        apiClient?.getStoresByUserId(2067452916)?.enqueue(object : Callback<Stores>{
+        apiClient?.getStoresByUserId(userId)?.enqueue(object : Callback<Stores>{
             override fun onResponse(call: Call<Stores>, response: Response<Stores>) {
                 val stores = response.body()
                 registeredRV.adapter = StoreAdapter(context!!, stores!!, layoutInflater)
