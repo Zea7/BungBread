@@ -111,6 +111,16 @@ class ServerConnect {
             return answer
         }
 
+        suspend fun sendComment(id:Long, store_id:String, contents:String){
+            var response:Response<CommentResponse>? =null
+            CoroutineScope(Dispatchers.IO).launch {
+                kotlin.runCatching {
+                    response = server.postComment(id, store_id, contents).execute()
+                }
+            }.join()
+            Log.d("CommentAdd", response!!.body()!!.toString())
+        }
+
         suspend fun checkUserWithId(id:Long, context:Context):Boolean{
             var answer:Boolean = false
             var response:Response<UserResponse>? = null

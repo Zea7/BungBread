@@ -24,6 +24,9 @@ interface RetrofitService {
 
     @POST("users/pick")
     fun pickStore(@Query("user_id") id:Long, @Query("store_id") store_id:String):Call<StorePick>
+
+    @POST("stores/addComment")
+    fun postComment(@Query("user_id") id:Long, @Query("store_id") storeId:String, @Query("contents") contents: String):Call<CommentResponse>
 }
 
 // 회원 정보 조회 응답 바디
@@ -49,7 +52,7 @@ data class DistanceStoreItem(
     val __v: Int,
     val _id: String,
     val address: String,
-    val comments: List<Any>,
+    val comments: List<Comment>,
     val createdOrEditedAt: String,
     val desc: String,
     val menus: List<Menu>,
@@ -81,7 +84,7 @@ data class Store(
     val __v: Int,
     val _id: String,
     val address: String,
-    val comments: List<Any>,
+    val comments: List<Comment>,
     val createdOrEditedAt: String,
     val desc: String,
     val menus: List<Menu>,
@@ -104,4 +107,10 @@ data class Comment(
 data class StorePick(
     val ok: Boolean,
     val user: User
+)
+
+
+data class CommentResponse(
+    val ok: Boolean,
+    val result: Comment
 )

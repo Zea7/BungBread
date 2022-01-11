@@ -31,7 +31,7 @@ class CommentAdapter(val comment:List<Comment>): RecyclerView.Adapter<CommentAda
     override fun onBindViewHolder(holder: CommentHolder, position: Int) {
         val comment_item = comment[position]
 
-
+        holder.name.text = comment_item.writer.toString()
         holder.text.text = comment_item.contents
     }
 
