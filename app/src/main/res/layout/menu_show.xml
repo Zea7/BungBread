@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+    android:weightSum="100">
+    <TextView
+        android:id="@+id/menu_menu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="팥 붕어빵"
+        android:layout_weight="30"
+        />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="15"
+    />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
+        android:src="@drawable/dotes"/>
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:src="@drawable/dotes"/>
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="15"
+        />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="3개"
+        android:layout_weight="10"
+        android:id="@+id/count"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="10000원"
+        android:layout_weight="18"
+        android:id="@+id/price"/>
+
+</LinearLayout>
+
+

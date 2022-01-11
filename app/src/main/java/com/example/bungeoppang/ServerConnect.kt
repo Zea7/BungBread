@@ -7,10 +7,7 @@ import android.widget.Toast
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.bungeoppang.AddStore.AddStore
-import com.example.bungeoppang.retrofit.DistanceStore
-import com.example.bungeoppang.retrofit.DistanceStoreItem
-import com.example.bungeoppang.retrofit.RetrofitService
-import com.example.bungeoppang.retrofit.UserResponse
+import com.example.bungeoppang.retrofit.*
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -191,6 +188,33 @@ class ServerConnect {
             return jsons
         }
 
+        suspend fun storeget(latitude:Double, longitude:Double, context:Context):Response<StoreLocation>{
+
+            var result: Response<StoreLocation>?=null
+            CoroutineScope(Dispatchers.IO).launch{
+                kotlin.runCatching {
+                    result = server.getStoresByLocation(longitude, latitude).execute()
+                }
+            }.join()
+
+            return result!!
+        }
+
+        suspend fun getStoreByLocation(latitude:Double, longitude: Double, context:Context):StoreLocation{
+            var answer:StoreLocation? = null
+            lateinit var result:Response<StoreLocation>
+            CoroutineScope(Dispatchers.IO).launch{
+                result = storeget(latitude, longitude, context)
+            }.join()
+            val gson = Gson()
+            Log.d("Result", result.body()!!.toString())
+            if(result.body()!!.ok){
+                answer = result.body()!!
+            }
+            return answer!!
+        }
+
+
         fun makeFileOrChange(id:Long, name:String, context:Context){
             val file = File(context.filesDir,"login.json")
             if(file.exists()) {
@@ -236,6 +260,18 @@ class ServerConnect {
                 e.printStackTrace()
                 Log.e("ServerLogin", "No file")
             }
+        }
+
+        suspend fun pickStoreByUser(id:Long, store_id:String):Boolean{
+            var answer = false
+            lateinit var response:Response<StorePick>
+            CoroutineScope(Dispatchers.IO).launch {
+                kotlin.runCatching {
+                    response = server.pickStore(id, store_id).execute()
+                }
+            }.join()
+            if(response.body()!!.ok) answer = true
+            return answer
         }
     }
 }

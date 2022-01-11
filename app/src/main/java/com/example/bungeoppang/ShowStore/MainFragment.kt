@@ -1,4 +1,4 @@
-package com.example.bungeoppang
+package com.example.bungeoppang.ShowStore
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -17,19 +17,21 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.core.app.ActivityCompat
 import com.example.bungeoppang.AddStore.AddStore
+import com.example.bungeoppang.MainActivity
+import com.example.bungeoppang.R
+import com.example.bungeoppang.ServerConnect
 import com.example.bungeoppang.retrofit.DistanceStoreItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
-import org.json.JSONArray
 import org.json.JSONObject
+import java.io.Serializable
 import java.lang.Exception
 
-class MainFragment : Fragment(){
+class MainFragment : Fragment(), MapView.POIItemEventListener, Serializable{
     private lateinit var locationManager: LocationManager
     private var latitude:Double = 0.0
     private var longitude:Double = 0.0
@@ -117,10 +119,11 @@ class MainFragment : Fragment(){
             temp.put("menus", json.menus)
             array.add(temp)
             val marker = MapPOIItem()
-            marker.selectedMarkerType = MapPOIItem.MarkerType.BluePin
+            marker.selectedMarkerType = MapPOIItem.MarkerType.YellowPin
             marker.mapPoint = MapPoint.mapPointWithGeoCoord(temp.getDouble("latitude"), temp.getDouble("longitude"))
             marker.itemName = temp.getString("storeName")
             map.addPOIItem(marker)
+            map.setPOIItemEventListener(this)
         }
 
         return array
@@ -128,7 +131,7 @@ class MainFragment : Fragment(){
 
     companion object {
         @JvmStatic
-        fun newInstance() :MainFragment = MainFragment()
+        fun newInstance() : MainFragment = MainFragment()
     }
 
     @SuppressLint("MissingPermission")
@@ -174,5 +177,29 @@ class MainFragment : Fragment(){
         customMarker.customImageResourceId = R.drawable.user_marker
         customMarker.isCustomImageAutoscale = false
         return customMarker
+    }
+
+    override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
+        val point = p1!!.mapPoint
+        val intent = Intent(context, ShowStore::class.java)
+        intent.putExtra("latitude", point.mapPointGeoCoord.latitude )
+        intent.putExtra("longitude", point.mapPointGeoCoord.longitude)
+        startActivity(intent)
+
+    }
+
+    override fun onCalloutBalloonOfPOIItemTouched(p0: MapView?, p1: MapPOIItem?) {
+
+    }
+
+    override fun onCalloutBalloonOfPOIItemTouched(
+        p0: MapView?,
+        p1: MapPOIItem?,
+        p2: MapPOIItem.CalloutBalloonButtonType?
+    ) {
+
+    }
+
+    override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {
     }
 }

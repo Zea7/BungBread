@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -58,12 +59,15 @@ class AdditionalInfo : AppCompatActivity(), ChangeMenu {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.home) {
-            onBackPressed()
+        if (item.itemId == android.R.id.home) {
+            this.onBackPressed()
         } else if (item.itemId == R.id.save) {
             getInfoFromEdit()
-            val jsons = menuAdapter?.getAllJsons()
+            val jsons = menuAdapter?.getAllJsons() ?: return false
             // Variable로 변경 필요
+            if(name== ""){
+                Toast.makeText(applicationContext, "가게 이름 입력은 필수입니다!", Toast.LENGTH_SHORT).show()
+            }
             ServerConnect.sendStoreInfo(address!!, name!!, Variables.USER_ID, Variables.USER_NAME, latitude, longitude, jsons, comment!!, this)
         }
         return super.onOptionsItemSelected(item)

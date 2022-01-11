@@ -51,7 +51,7 @@ class AddStore : AppCompatActivity() , MapView.MapViewEventListener, MapView.POI
         addStoreActivity = this
 
         // 뒤로가기 버튼
-        getSupportActionBar()?.setTitle("Gallery")
+        getSupportActionBar()?.setTitle("가게 추가")
         getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
         getSupportActionBar()?.setDisplayShowHomeEnabled(true)
         marker.isDraggable = true

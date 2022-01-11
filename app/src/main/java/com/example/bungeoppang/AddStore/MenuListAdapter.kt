@@ -42,10 +42,21 @@ class MenuListAdapter(val category:String): RecyclerView.Adapter<MenuListAdapter
     fun getInfoOfMenus():JSONArray{
         val jsons = JSONArray()
         for(i in  holders){
-            menuName  = i.menu_name.text.toString()
+            if(i.menu_name.text.toString() == "")
+                menuName = "?"
+            else
+                menuName  = i.menu_name.text.toString()
             menuName += String.format(" %s", category)
-            menuCount = i.menu_count.text.toString().toInt()
-            menuPrice = i.menu_price.text.toString().toInt()
+            if(i.menu_count.text.toString() == "")
+                menuCount = 0
+            else
+                menuCount  = i.menu_count.text.toString().toInt()
+            if(i.menu_price.text.toString() == "")
+                menuPrice = 0
+            else
+                menuPrice  = i.menu_price.text.toString().toInt()
+
+
             val json = JSONObject()
             json.put("itemName", menuName)
             json.put("count", menuCount)

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ShowStore.ShowStore">
+
+    <ImageView
+        android:id="@+id/star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/star"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="30dp"/>
+
+    <ImageView
+        android:id="@+id/store_icon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="익명"
+        app:layout_constraintTop_toBottomOf="@id/store_icon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/nickname"
+        />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가게 이름"
+        app:layout_constraintTop_toBottomOf="@id/nickname"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        android:id="@+id/store_name"
+        android:textSize="24sp"
+        />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/store_name"
+        android:text="대전 유성구 400"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="@id/desc"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="주소"
+        android:textSize="18sp"
+        android:id="@+id/주소"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintTop_toTopOf="@id/address"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="한줄평"
+        android:textSize="18sp"
+        android:id="@+id/한줄평"
+        app:layout_constraintLeft_toLeftOf="@id/주소"
+        app:layout_constraintTop_toTopOf="@id/desc"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/desc"
+        app:layout_constraintTop_toBottomOf="@id/address"
+        app:layout_constraintLeft_toRightOf="@id/한줄평"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:text="맛있다"
+        android:textSize="18sp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/category_show"
+        app:layout_constraintTop_toBottomOf="@id/menu"
+        app:layout_constraintLeft_toLeftOf="@id/한줄평"
+        android:layout_marginTop="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="댓글"
+        android:textSize="18sp"
+        android:id="@+id/comment"
+        app:layout_constraintLeft_toLeftOf="@id/한줄평"
+        app:layout_constraintTop_toBottomOf="@id/category_show"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="메뉴"
+        android:id="@+id/menu"
+        app:layout_constraintTop_toBottomOf="@id/한줄평"
+        app:layout_constraintLeft_toLeftOf="@id/한줄평"
+        android:layout_marginTop="30dp"
+        />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/comment_recycler"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/category_show"
+        app:layout_constraintTop_toBottomOf="@id/comment"
+        android:layout_marginTop="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.bungeoppang.ShowStore.MainFragment
 import com.example.bungeoppang.info.InfoFragment
 import com.gun0912.tedpermission.TedPermission
 import java.util.ArrayList
@@ -49,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //Main Fragment
-        var fragment1:MainFragment = MainFragment.newInstance()
+        var fragment1: MainFragment = MainFragment.newInstance()
 
         //Map Fragment
         var fragment2:MapFragment = MapFragment.newInstance()
