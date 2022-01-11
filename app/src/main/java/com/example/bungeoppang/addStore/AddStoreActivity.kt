@@ -17,7 +17,7 @@ import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapReverseGeoCoder
 import net.daum.mf.map.api.MapView
 
-class AddStore : AppCompatActivity() , MapView.MapViewEventListener, MapView.POIItemEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener{
+class AddStoreActivity : AppCompatActivity() , MapView.MapViewEventListener, MapView.POIItemEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener{
     private var latitude:Double = 0.0
     private var longitude:Double = 0.0
     private var save_button: Button? = null
@@ -27,41 +27,33 @@ class AddStore : AppCompatActivity() , MapView.MapViewEventListener, MapView.POI
     private val TAG = "AppStore"
     private var address: String? = null
     companion object{
-        var addStoreActivity: AddStore? = null
+        var addStoreActivity: AddStoreActivity? = null
     }
 
-    override fun onBackPressed() {
-        goBackToMain()
-    }
+//    override fun onBackPressed() {
+//        goBackToMain()
+//    }
 
     // App bar 버튼 동작
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == android.R.id.home){
-            goBackToMain()
-        }
-        return super.onOptionsItemSelected(item)
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        if(item.itemId == android.R.id.home){
+//            goBackToMain()
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_store)
-
         addStoreActivity = this
-
-        // 뒤로가기 버튼
-        getSupportActionBar()?.setTitle("Gallery")
-        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
-        getSupportActionBar()?.setDisplayShowHomeEnabled(true)
         marker.isDraggable = true
         marker.itemName = "가게 위치"
         marker.markerType = MapPOIItem.MarkerType.CustomImage
         marker.customImageResourceId = R.drawable.blue_marker
 
         save_button = findViewById(R.id.save_store_button)
-        text = findViewById(R.id.address_show)
-        text?.setTextColor(R.color.black)
         map = findViewById<MapView>(R.id.add_store_map)
         map?.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude), true)
         marker.mapPoint = map?.mapCenterPoint
@@ -175,7 +167,7 @@ class AddStore : AppCompatActivity() , MapView.MapViewEventListener, MapView.POI
     }
 
     override fun onReverseGeoCoderFoundAddress(p0: MapReverseGeoCoder?, p1: String?) {
-        text?.text = p1!!
+        supportActionBar?.title = p1!!
         address = p1
     }
 

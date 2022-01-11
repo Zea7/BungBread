@@ -3,10 +3,9 @@ package com.example.bungeoppang
 import android.app.Activity
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.bungeoppang.addStore.AddStore
+import com.example.bungeoppang.addStore.AddStoreActivity
 import com.example.bungeoppang.retrofit.DistanceStore
 import com.example.bungeoppang.retrofit.DistanceStoreItem
 import com.example.bungeoppang.retrofit.RetrofitService
@@ -22,7 +21,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
-import java.io.FileOutputStream
 import java.lang.Exception
 
 class ServerConnect {
@@ -59,7 +57,7 @@ class ServerConnect {
                         Log.d("ServerRequestToAddStore", "성공적으로 정보를 올렸습니다.")
                         Log.d("ServerRequestToAddStore", it.toString())
                         activity.finish()
-                        AddStore.addStoreActivity?.goBackToMain()
+                        AddStoreActivity.addStoreActivity?.goBackToMain()
                     }
                     else{
                         Log.d("ServerRequestToAddStore", "실패!")

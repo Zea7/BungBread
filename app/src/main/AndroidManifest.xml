@@ -28,7 +28,7 @@
             android:name=".addStore.AdditionalInfo"
             android:exported="false" />
         <activity
-            android:name=".addStore.AddStore"
+            android:name=".addStore.AddStoreActivity"
             android:exported="false" />
         <activity
             android:name=".Temp"

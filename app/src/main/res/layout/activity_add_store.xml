@@ -5,7 +5,7 @@
     android:id="@+id/add_group"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".addStore.AddStore">
+    tools:context=".addStore.AddStoreActivity">
 
 
     <net.daum.mf.map.api.MapView
@@ -22,13 +22,5 @@
         android:background="@drawable/fitting_box"
         android:text="위치 저장"
         android:textSize="20sp" />
-    <TextView
-        android:id="@+id/address_show"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="65dp"
-        android:textSize="20sp"/>
-
 
 </FrameLayout>

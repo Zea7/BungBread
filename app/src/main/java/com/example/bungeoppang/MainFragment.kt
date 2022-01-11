@@ -16,7 +16,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.core.app.ActivityCompat
-import com.example.bungeoppang.addStore.AddStore
+import com.example.bungeoppang.addStore.AddStoreActivity
 import com.example.bungeoppang.retrofit.DistanceStoreItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -82,7 +82,7 @@ class MainFragment : Fragment(){
 
 
         button.setOnClickListener {
-            val intent: Intent = Intent(context, AddStore::class.java)
+            val intent: Intent = Intent(context, AddStoreActivity::class.java)
             latitude = map.mapCenterPoint.mapPointGeoCoord.latitude
             longitude = map.mapCenterPoint.mapPointGeoCoord.longitude
             intent.putExtra("latitude", latitude)
@@ -115,7 +115,7 @@ class MainFragment : Fragment(){
             temp.put("menus", json.menus)
             array.add(temp)
             val marker = MapPOIItem()
-            marker.selectedMarkerType = MapPOIItem.MarkerType.BluePin
+            marker.selectedMarkerType = MapPOIItem.MarkerType.YellowPin
             marker.mapPoint = MapPoint.mapPointWithGeoCoord(temp.getDouble("latitude"), temp.getDouble("longitude"))
             marker.itemName = temp.getString("storeName")
             map.addPOIItem(marker)
