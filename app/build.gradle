@@ -46,7 +46,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.7.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
     implementation 'io.github.ibrahimyilmaz:kiel:1.2.1'
-    implementation files('D:\\VSCode\\BungBread\\app\\libs\\libDaumMapAndroid.jar')
+    implementation files('/Users/park/AndroidStudioProjects/BungBread/app/libs/libDaumMapAndroid.jar')
     annotationProcessor "com.github.bumptech.glide:compiler:4.11.0"
     //noinspection GradleCompatible
     implementation 'com.android.support:design:28.0.0'
